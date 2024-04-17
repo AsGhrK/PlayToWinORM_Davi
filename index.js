@@ -1,6 +1,7 @@
 require("dotenv").config();
 const conn = require("./db/conn");
 const Usuario = require("./models/Usuario")
+const Jogo = require("./models/Jogo")
 
 const express =require("express");
 const app = express();
@@ -17,6 +18,9 @@ app.get("/usuario/novo" , (rec,res) =>{
   res.sendFile(`${__dirname}/views/formUsuario.html`)
 });
 
+app.get("/jogo/novo" , (rec,res) =>{
+  res.sendFile(`${__dirname}/views/formJogo.html`)
+});
 
 
 conn
