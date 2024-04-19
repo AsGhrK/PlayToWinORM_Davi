@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/jogo/novo" method="post">
+        <div>
+            <!--Campo para inserir o titulo-->
+            <label for="titulo">Titulo</label>
+            <input type="text" id="titulo" name="titulo">
+        </div>
+
+        <div>
+             <!--Campo para inserir a descrição-->
+            <label for="descricao">descrição</label>
+            <input type="text" id="descricao" name="descricao">
+        </div>
+
+        <div>
+             <!--Campo para inserir o preço-->
+            <label for="precoBase">Preço</label>
+            <input type="text" id="precoBase" name="precoBase">
+        </div>
+        <input type="submit" value="Cadastrar"/>
+    </form>
+</body>
+</html>

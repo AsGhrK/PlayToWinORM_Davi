@@ -1,28 +1,37 @@
+// Importações de módulos e configurações
 require("dotenv").config();
+const express = require("express");
 const conn = require("./db/conn");
-const Usuario = require("./models/Usuario")
-const Jogo = require("./models/Jogo")
+const Jogo = require("./models/Jogo");
 
-const express =require("express");
 const app = express();
 
-app.use(
-  express.urlencoded({
-    extended:true
-  })
-);
+// Configurações do middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.use(express.json())
+// Rotas
+app.post("/jogo/novo", async (req, res) => {
+  const dadosJogo = {
+    titulo: req.body.titulo,
+    descricao: req.body.descricao,
+    precoBase: req.body.precoBase
+  }
 
-app.get("/usuario/novo" , (rec,res) =>{
-  res.sendFile(`${__dirname}/views/formUsuario.html`)
+  const jogo = await Jogo.create(dadosJogo);
+  res.send("Jogo cadastrado com id" + jogo.id);
 });
 
-app.get("/jogo/novo" , (rec,res) =>{
-  res.sendFile(`${__dirname}/views/formJogo.html`)
+app.get("/jogo/novo", (req, res) => {
+  res.sendFile(`${__dirname}/views/formJogo.html`);
 });
 
+// Inicialização do servidor
+app.listen(8000, () => {
+  console.log("Abridu!");
+});
 
+// Conexão com o banco de dados
 conn
   .sync()
   .then(() => {
