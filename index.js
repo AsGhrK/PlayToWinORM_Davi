@@ -3,8 +3,15 @@ require("dotenv").config();
 const express = require("express");
 const conn = require("./db/conn");
 const Jogo = require("./models/Jogo");
+const handlebars = require("express-handlebars");
+const { json } = require("express/lib/response");
+const Usuario = require("./models/Usuario");
 
 const app = express();
+
+// HandleBars
+app.engine("handlebars", handlebars.engine())
+app.set ("view engine", "handlebars")
 
 // Configurações do middleware
 app.use(express.urlencoded({ extended: true }));
@@ -22,8 +29,32 @@ app.post("/jogo/novo", async (req, res) => {
   res.send("Jogo cadastrado com id" + jogo.id);
 });
 
+
+app.post("/usuario/novo", async (req, res) => {
+  const dadosUsuario = {
+    nickname: req.body.nickname,
+    nome: req.body.nome
+  }
+
+  const usuario = await Usuario.create(dadosUsuario);
+  res.send("Jogo cadastrado com id" + usuario.id);
+});
+
 app.get("/jogo/novo", (req, res) => {
-  res.sendFile(`${__dirname}/views/formJogo.html`);
+  res.render(`formJogo`);
+});
+
+app.get("/usuario/novo", (req, res) => {
+  res.render(`formUsuario`);
+});
+
+
+app.get("/", (req, res) => {
+  res.render(`home`);
+});
+
+app.get("/usuarios", (req, res) => {
+  res.render(`usuarios`);
 });
 
 // Inicialização do servidor
