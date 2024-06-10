@@ -1,16 +1,21 @@
 <h1>Cadastre-se</h1>
 
-<form action="/usuario/novo" method="post">
-    <div>
-        <!--Campo para inserir o titulo-->
-        <label for="nickname">NickName</label>
-        <input type="text" id="nickname" name="nickname">
-    </div>
-
-    <div>
-        <!--Campo para inserir a descrição-->
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome">
-    </div>
-    <input type="submit" value="Cadastrar" />
-</form>
+<a href="/usuarios/novo">Cadastrar Usuario</a>
+<table border="1">
+    <tr>
+        <td>ID</td>
+        <td>NickName</td>
+        <td>Nome</td>
+        <th>Ações</th>
+    </tr>
+    {{#each usuarios}}
+    <tr>
+        <td>{{this.id}}</td>
+        <td>{{this.nickname}}</td>
+        <td>{{this.nome}}</td>
+        <td>
+            <a href="/usuarios/{{this.id}}/atualizar">Atualizar</a>
+        </td>
+    </tr>
+    {{/each}}
+</table>
