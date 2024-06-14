@@ -27,7 +27,7 @@ app.post("/jogo/novo", async (req, res) => {
   }
 
   const jogo = await Jogo.create(dadosJogo);
-  res.send("Jogo cadastrado com id" + jogo.id);
+  res.send("Jogo cadastrado com id" + jogo.id + `<a href= "http://localhost:8000/usuarios"> VOltar </a>`);
 });
 
 
@@ -38,7 +38,7 @@ app.post("/usuario/novo", async (req, res) => {
   }
 
   const usuario = await Usuario.create(dadosUsuario);
-  res.send("Usuario cadastrado com id" + usuario.id);
+  res.send("Usuario cadastrado com id" + usuario.id  + `<a href= "http://localhost:8000/usuarios"> VOltar </a>`);
 });
 
 app.get("/jogo/novo", (req, res) => {
@@ -62,7 +62,25 @@ app.get("/usuarios", async (req, res) => {
 app.get("/usuarios/:id/atualizar", async (req, res) => {
   const id = req.params.id
   const usuario = await Usuario.findByPk(id, { raw: true })
-  res.render("formUsuario", { usuario });
+  res.render("formUsuario", { usuario },) ;
+})
+
+
+app.post("/usuarios/:id/atualizar", async (req, res) => {
+  const id = req.params.id
+
+  const dadosUsuario = {
+    nickname: req.body.nickname,
+    nome: req.body.nome
+  }
+
+  const registroAfetados = await Usuario.update(dadosUsuario, { where: { id: id } });
+
+  if(registroAfetados > 0){
+    res.redirect("/usuarios")
+  }else{
+    res.send("Erro ap atualizar esse cabra aqui")
+  }
 })
 
 // Inicialização do servidor
