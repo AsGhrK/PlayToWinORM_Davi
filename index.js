@@ -4,8 +4,8 @@ const express = require("express");
 const conn = require("./db/conn");
 const handlebars = require("express-handlebars");
 const Usuario = require("./models/Usuario");
-const Cartao = require("./models/Cartao");
 const Jogo = require("./models/Jogo");
+const Cartao = require("./models/Cartao");
 const Conquista = require("./models/Conquista")
 const { DataTypes } = require("sequelize");
 
@@ -157,7 +157,7 @@ app.get("/usuarios/:id/novoCartao", async (req, res) => {
 
 app.post("/usuarios/:id/novoCartao", async (req, res) => {
   const id = parseInt(req.params.id);
-
+  
   const dadosCartao = {
     numero: req.body.numero,
     nome: req.body.nome,
