@@ -2,12 +2,6 @@ const db = require('../db/conn');
 const {DataTypes} = require("sequelize");
 
 const Jogo = db.define("Jogo",{
-    id:{
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        allowNull: false,
-        autoIncrement: true,
-    },
     titulo:{
         type: DataTypes.STRING,
         allowNull: false,

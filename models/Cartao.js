@@ -16,6 +16,8 @@ const Cartao = conn.define("Cartao", {
         type: DataTypes.STRING(3),
         allowNull: false,
     }
+},{
+      tableName: "Cartoes"
 })
 
 Cartao.belongsTo(Usuario)
